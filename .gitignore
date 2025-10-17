@@ -1,0 +1,32 @@
+# Backup files
+*.backup
+*.bak
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Temporary files
+*.tmp
+temp/
+tmp/
+
+# Logs
+*.log
+logs/
+
+# Editor files
+.vscode/
+.idea/
+*.sublime-*
+
+# Local configuration
+*.local
+.env
+
+# Test artifacts
+test-results/
+coverage/
