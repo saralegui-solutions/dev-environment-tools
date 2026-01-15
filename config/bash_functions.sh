@@ -44,13 +44,13 @@ tmux-switch() {
         options="$sessions"$'\n'"[CREATE NEW SESSION]"
     fi
 
-    # Show interactive menu
+    # Show interactive menu (< /dev/tty ensures fzf can read from terminal)
     local selection=$(echo "$options" | fzf \
         --prompt="🖥️  Select tmux session: " \
         --height=40% \
         --border=rounded \
         --reverse \
-        --header="↑↓ navigate | Enter select | Esc cancel")
+        --header="↑↓ navigate | Enter select | Esc cancel" < /dev/tty)
 
     if [ -z "$selection" ]; then
         echo "No selection made"
