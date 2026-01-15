@@ -1,0 +1,13 @@
+[Unit]
+Description=tmux crash watchdog - monitors and restarts tmux on failure
+After=tmux.service
+Requires=tmux.service
+
+[Service]
+Type=simple
+ExecStart=/home/ben/.local/bin/tmux-watchdog.sh
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target

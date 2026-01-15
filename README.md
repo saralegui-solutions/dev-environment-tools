@@ -5,6 +5,7 @@ A comprehensive package of terminal productivity tools, tmux configurations, and
 ## 🚀 Features
 
 - **Tmux Configuration**: Optimized tmux setup with mouse support, vi-mode, and performance enhancements
+- **Tmux Resilience Layer**: 4-layer crash prevention and auto-recovery system (NEW)
 - **Interactive Session Switcher**: fzf-powered tmux session management
 - **Claude Code Integration**: Quick-launch aliases for Claude Code
 - **Automated Installation**: One-command setup with dependency checking
@@ -20,6 +21,16 @@ A comprehensive package of terminal productivity tools, tmux configurations, and
 - Session management enhancements
 - Custom window/pane navigation
 - Copy mode improvements
+
+### Tmux Resilience Layer (NEW - January 2026)
+Comprehensive crash protection system born from a real incident where tmux 3.4 crashed all sessions:
+
+- **Layer 1**: tmux 3.6a upgrade (fixes segfault bugs)
+- **Layer 2**: Session persistence (tmux-resurrect + continuum plugins)
+- **Layer 3**: Systemd auto-recovery (restarts server on crash)
+- **Layer 4**: Crash watchdog (monitoring + notifications)
+
+See [tmux-resilience/README.md](tmux-resilience/README.md) for full documentation.
 
 ### Shell Functions & Aliases
 - **`tms`** / **`tmux-switch`** - Interactive tmux session switcher with fzf
@@ -51,6 +62,19 @@ cd dev-environment-tools
 
 # Show help
 ./scripts/install.sh --help
+```
+
+### Install Resilience Layer (Recommended)
+Protect against tmux crashes with 4-layer defense:
+```bash
+# Full installation (upgrades tmux, installs plugins, systemd services)
+./tmux-resilience/install-resilience.sh
+
+# Step-by-step with confirmations
+./tmux-resilience/install-resilience.sh --step-by-step
+
+# Keep existing tmux version
+./tmux-resilience/install-resilience.sh --skip-upgrade
 ```
 
 ## 📖 Usage
@@ -112,6 +136,16 @@ dev-environment-tools/
 ├── config/
 │   ├── tmux.conf                      # Tmux configuration
 │   └── bash_functions.sh              # Shell functions and aliases
+├── tmux-resilience/                   # NEW: Crash protection system
+│   ├── README.md                      # Resilience layer documentation
+│   ├── install-resilience.sh          # Resilience installer
+│   ├── config/
+│   │   └── tmux-resilience.conf       # Plugin configuration
+│   ├── scripts/
+│   │   └── tmux-watchdog.sh           # Crash monitoring daemon
+│   └── systemd/
+│       ├── tmux.service               # tmux as systemd service
+│       └── tmux-watchdog.service      # Watchdog as systemd service
 └── docs/
     ├── USAGE.md                       # Detailed usage guide
     ├── TROUBLESHOOTING.md             # Common issues and solutions
@@ -306,5 +340,5 @@ The installer is idempotent - running it multiple times is safe and will update 
 
 **Created by**: Saralegui Solutions LLC
 **Repository**: https://github.com/saralegui-solutions/dev-environment-tools
-**Version**: 1.0.0
-**Last Updated**: October 2024
+**Version**: 1.1.0
+**Last Updated**: January 2026

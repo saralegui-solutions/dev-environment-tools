@@ -1,0 +1,18 @@
+[Unit]
+Description=tmux server with session persistence
+Documentation=man:tmux(1)
+After=default.target
+
+[Service]
+Type=forking
+# Use new tmux 3.6a once installed, fallback to system tmux
+ExecStart=/bin/bash -c 'if [ -x /usr/local/bin/tmux ]; then /usr/local/bin/tmux new-session -d -s main; else /usr/bin/tmux new-session -d -s main; fi'
+ExecStop=/bin/bash -c 'if [ -x /usr/local/bin/tmux ]; then /usr/local/bin/tmux kill-server; else /usr/bin/tmux kill-server; fi'
+# Auto-restart on crash
+Restart=on-failure
+RestartSec=3
+# Environment for proper terminal handling
+Environment=TERM=screen-256color
+
+[Install]
+WantedBy=default.target
